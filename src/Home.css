@@ -1,0 +1,7 @@
+.secret_image{
+    display: block;
+    width: 3rem;
+    height: auto;
+    margin: 1rem auto 1rem;
+    filter: invert(0.65) sepia(1) saturate(50) hue-rotate(90deg);
+}
