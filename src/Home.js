@@ -12,7 +12,7 @@ function Home() {
         </button>
       </div>
 
-      <div className="container col-8 col-sm-8 col-md-6 col-lg-4 col-xl-4">
+      <div className="container col-8 col-sm-8 col-md-6 col-lg-4 col-xl-4 mt-3">
         <h2 className="text-center">X to play</h2>
       </div>
 
@@ -80,7 +80,6 @@ function Home() {
         <img className="first-image btn btn-outline-success "
              src="/images/last.svg" alt="last"/>
       </div>
-
 
     </div>
   )
