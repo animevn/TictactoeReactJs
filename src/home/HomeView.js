@@ -1,6 +1,13 @@
 import React, {useContext} from "react";
 import "./Home.css";
-import {BoardContext, inform, moveFirstEnable, moveLastEnable} from "./HomeModel";
+import {
+  BoardContext,
+  inform,
+  moveBackEnable,
+  moveFirstEnable,
+  moveLastEnable,
+  moveNextEnable
+} from "./HomeModel";
 
 function HomeView(props) {
   const {myboard} = useContext(BoardContext);
@@ -99,10 +106,14 @@ function HomeView(props) {
              onClick={onMove} id="move-first"
              src="/images/first.svg" alt="first"/>
 
-        <img className="image-enable btn btn-outline-success" onClick={onMove} id="move-back"
+        <img className={(moveBackEnable(myboard) ? "image-enable " : "image-disable ")
+                        + "btn btn-outline-success"}
+             onClick={onMove} id="move-back"
              src="/images/back.svg" alt="back"/>
 
-        <img className="image-enable btn btn-outline-success" onClick={onMove} id="move-next"
+        <img className={(moveNextEnable(myboard) ? "image-enable " : "image-disable ")
+                        + "btn btn-outline-success"}
+             onClick={onMove} id="move-next"
              src="/images/next.svg" alt="next"/>
 
         <img className={(moveLastEnable(myboard) ? "image-disable " : "image-enable ")
