@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import "./Home.css";
-import {BoardContext, inform} from "./HomeModel";
+import {BoardContext, inform, moveFirstEnable, moveLastEnable} from "./HomeModel";
 
 function HomeView(props) {
   const {myboard} = useContext(BoardContext);
@@ -94,7 +94,9 @@ function HomeView(props) {
       <div className="container col-11 col-sm-11 col-md-9 col-lg-7 col-xl-6 mx-auto mt-5
                       d-flex flex-row justify-content-around">
 
-        <img className="image-enable btn btn-outline-success" onClick={onMove} id="move-first"
+        <img className={(moveFirstEnable(myboard) ? "image-disable " : "image-enable ")
+                        + "btn btn-outline-success"}
+             onClick={onMove} id="move-first"
              src="/images/first.svg" alt="first"/>
 
         <img className="image-enable btn btn-outline-success" onClick={onMove} id="move-back"
@@ -103,7 +105,9 @@ function HomeView(props) {
         <img className="image-enable btn btn-outline-success" onClick={onMove} id="move-next"
              src="/images/next.svg" alt="next"/>
 
-        <img className="image-enable btn btn-outline-success" onClick={onMove} id="move-last"
+        <img className={(moveLastEnable(myboard) ? "image-disable " : "image-enable ")
+                        + "btn btn-outline-success"}
+             onClick={onMove} id="move-last"
              src="/images/last.svg" alt="last"/>
       </div>
 

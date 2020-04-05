@@ -234,3 +234,15 @@ export const moveLast = (board)=>{
     game: {moves:moves, currentMove:currentMove}
   }
 };
+
+export const moveFirstEnable = (board)=>{
+  let {game} = board;
+  let {currentMove} = game;
+  return currentMove === 0;
+};
+
+export const moveLastEnable = (board)=>{
+  let {game} = board;
+  let {moves, currentMove} = game;
+  return currentMove === moves.length;
+};
