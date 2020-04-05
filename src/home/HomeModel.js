@@ -16,6 +16,7 @@ const initalMyBoard = {
 };
 
 export const BoardContextProvider = ({children})=>{
+
   const save = localStorage.getItem("mySave");
   const [myboard, setMyboard] = useState(save ? JSON.parse(save) : initalMyBoard);
 
