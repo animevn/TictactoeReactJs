@@ -1,4 +1,4 @@
-import React, {createContext, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 
 export const BoardContext = createContext(null);
 
@@ -16,7 +16,13 @@ const initalMyBoard = {
 };
 
 export const BoardContextProvider = ({children})=>{
-  const [myboard, setMyboard] = useState(initalMyBoard);
+  const save = localStorage.getItem("mySave");
+  const [myboard, setMyboard] = useState(save ? JSON.parse(save) : initalMyBoard);
+
+  useEffect(()=>{
+    localStorage.setItem("mySave", JSON.stringify(myboard));
+  }, [myboard]);
+
   return (
     <BoardContext.Provider value={{myboard, setMyboard}}>
       {children}
