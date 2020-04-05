@@ -50,12 +50,11 @@ export const clearCells = (board)=>{
     }
   }
   return {
-    ...board,
     gameboard: gameboard,
     winner: null,
     currentPlayer: players.X,
     state: states.progress,
-    game: initalGame
+    game: {moves:[], currentMove: 0}
   };
 };
 
@@ -109,7 +108,6 @@ const deleteMovesAfterCurrentMove = (game)=>{
   return {...game, moves:moves};
 };
 
-
 export const makeMove = (board, row, col)=>{
   let {gameboard, state, winner, currentPlayer, game} = board;
   let {moves, currentMove} = game;
@@ -136,7 +134,6 @@ export const makeMove = (board, row, col)=>{
   }
 
   return {
-    ...board,
     gameboard: gameboard,
     state: state,
     winner: winner,
