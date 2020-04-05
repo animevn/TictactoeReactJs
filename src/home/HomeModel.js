@@ -2,33 +2,26 @@ import React, {createContext, useState} from "react";
 
 export const BoardContext = createContext(null);
 
-export const initialBoard = [["", "", ""], ["", "", ""], ["", "", ""]];
+const players = {X: "X", O: "O"};
+const states = {progress:"In Progress", finish: "Has Result", draw: "Draw"};
+const initialBoard = [["", "", ""], ["", "", ""], ["", "", ""]];
+const initalGame = {moves:[], currentMove:0};
 
-const players = {
-  X: "X",
-  O: "O"
-};
-
-const states = {
-  progress:"In Progress",
-  finish: "Has Result",
-  draw: "Draw"
-};
-
-const game = {
-  moveList:[],
-  currentMove:0,
-  row:null,
-  col:null,
-  state:null
-};
-
-const board = {
+const initalMyBoard = {
   gameboard:initialBoard,
   winner:null,
   currentPlayer:players.X,
   state:states.progress,
-  currentGame:game
+  game:initalGame
+};
+
+export const BoardContextProvider = ({children})=>{
+  const [myboard, setMyboard] = useState(initalMyBoard);
+  return (
+    <BoardContext.Provider value={{myboard, setMyboard}}>
+      {children}
+    </BoardContext.Provider>
+  )
 };
 
 export const inform = (board)=>{
@@ -42,15 +35,6 @@ export const inform = (board)=>{
   return "";
 };
 
-export const BoardContextProvider = ({children})=>{
-  const [myboard, setMyboard] = useState(board);
-  return (
-    <BoardContext.Provider value={{myboard, setMyboard}}>
-      {children}
-    </BoardContext.Provider>
-  )
-};
-
 export const clearCells = (board)=>{
   const {gameboard} = board;
   for (let i = 0; i < 3; i++){
@@ -58,12 +42,13 @@ export const clearCells = (board)=>{
       gameboard[i][j] = "";
     }
   }
-  return {...board,
+  return {
+    ...board,
     gameboard: gameboard,
     winner: null,
     currentPlayer: players.X,
     state: states.progress,
-    currentGame: game
+    game: initalGame
   };
 };
 
@@ -110,16 +95,25 @@ const isBoardFull = (board)=>{
 };
 
 export const makeMove = (board, row, col)=>{
-  let {gameboard, state, winner, currentPlayer} = board;
+  let {gameboard, state, winner, currentPlayer, game} = board;
+  let {moves, currentMove} = game;
 
   if (isCellValid(board, row, col)){
     gameboard[row][col] = currentPlayer;
+    let move = {player:currentPlayer, row:row, col:col, state:state};
+
     if (isWinningMove(board, row, col)){
       state = states.finish;
       winner = currentPlayer;
+      move = {...move, state: state};
     }else if (isBoardFull(board) && state === states.progress){
       state = states.draw;
+      move = {...move, state: state};
     }
+
+    moves.push(move);
+    currentMove++;
+
     if (state === states.progress){
       currentPlayer = currentPlayer === players.X ? players.O : players.X;
     }
@@ -130,7 +124,27 @@ export const makeMove = (board, row, col)=>{
     gameboard: gameboard,
     state: state,
     winner: winner,
-    currentPlayer: currentPlayer
+    currentPlayer: currentPlayer,
+    game: {moves:moves, currentMove:currentMove}
   };
 };
 
+export const moveBack = (board)=>{
+  let {gameboard, state, currentPlayer, game} = board;
+  let {moves, currentMove} = game;
+  if (currentMove > 0){
+    const moveCurrent = moves[currentMove - 1];
+    gameboard[moveCurrent.row][moveCurrent.col] = "";
+    currentMove--;
+    const moveToMoveBack = moves[currentMove - 1];
+    state = moveToMoveBack.state;
+    currentPlayer = currentPlayer === players.X ? players.O : players.X;
+  }
+  return {
+    ...board,
+    gameboard: gameboard,
+    state: state,
+    currentPlayer: currentPlayer,
+    game: {moves:moves, currentMove:currentMove}
+  }
+};
