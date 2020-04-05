@@ -1,9 +1,10 @@
 import React from "react";
 import Header from "./Header"
 import Footer from "./Footer";
-import Home from "./Home";
+import Home from "./home/Home";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css"
+import {BoardContextProvider} from "./home/HomeModel";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
 
         {/*app goes in here*/}
         <div className="container pt-2">
-          <Home/>
+          <BoardContextProvider>
+            <Home/>
+          </BoardContextProvider>
         </div>
 
       </div>
