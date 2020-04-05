@@ -4,7 +4,7 @@ import {BoardContext, clearCells, makeMove} from "./HomeModel";
 import HomeView from "./HomeView";
 
 function Home() {
-  const {myboard, setMyboard} = useContext(BoardContext);
+  const {setMyboard} = useContext(BoardContext);
 
   function reset() {
     setMyboard(old=>clearCells(old));
@@ -18,7 +18,7 @@ function Home() {
   }
 
   return (
-    <HomeView myboard={myboard} reset={reset} onClick={onClick}/>
+    <HomeView reset={reset} onClick={onClick}/>
   )
 }
 

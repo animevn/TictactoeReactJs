@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./Home.css";
-import {inform} from "./HomeModel";
+import {BoardContext, inform} from "./HomeModel";
 
 function HomeView(props) {
-  const myboard = props.myboard;
+  const {myboard} = useContext(BoardContext);
 
   function reset(event) {
     event.preventDefault();
