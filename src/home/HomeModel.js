@@ -42,15 +42,9 @@ export const inform = (board)=>{
   return "";
 };
 
-export const clearCells = (board)=>{
-  const {gameboard} = board;
-  for (let i = 0; i < 3; i++){
-    for (let j = 0; j < 3; j++){
-      gameboard[i][j] = "";
-    }
-  }
+export const clearCells = ()=>{
   return {
-    gameboard: gameboard,
+    gameboard: [["", "", ""], ["", "", ""], ["", "", ""]],
     winner: null,
     currentPlayer: players.X,
     state: states.progress,

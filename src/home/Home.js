@@ -9,13 +9,14 @@ import {
   moveLast,
   moveNext
 } from "./HomeModel";
+
 import HomeView from "./HomeView";
 
 function Home() {
   const {setMyboard} = useContext(BoardContext);
 
   function reset() {
-    setMyboard(old=>clearCells(old));
+    setMyboard(clearCells());
   }
 
   function onClick(event) {
