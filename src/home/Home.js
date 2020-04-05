@@ -1,6 +1,14 @@
 import React, {useContext} from "react";
 import "./Home.css";
-import {BoardContext, clearCells, makeMove, moveBack, moveFirst, moveNext} from "./HomeModel";
+import {
+  BoardContext,
+  clearCells,
+  makeMove,
+  moveBack,
+  moveFirst,
+  moveLast,
+  moveNext
+} from "./HomeModel";
 import HomeView from "./HomeView";
 
 function Home() {
@@ -28,6 +36,9 @@ function Home() {
         break;
       case "move-first":
         setMyboard(old=>moveFirst(old));
+        break;
+      case "move-last":
+        setMyboard(old=>moveLast(old));
         break;
       default:
         break;

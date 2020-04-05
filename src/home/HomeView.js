@@ -100,10 +100,10 @@ function HomeView(props) {
         <img className="first-image btn btn-outline-success" onClick={onMove} id="move-back"
              src="/images/back.svg" alt="back"/>
 
-        <img className="first-image btn btn-outline-success " onClick={onMove} id="move-next"
+        <img className="first-image btn btn-outline-success" onClick={onMove} id="move-next"
              src="/images/next.svg" alt="next"/>
 
-        <img className="first-image btn btn-outline-success "
+        <img className="first-image btn btn-outline-success" onClick={onMove} id="move-last"
              src="/images/last.svg" alt="last"/>
       </div>
 

@@ -209,3 +209,26 @@ export const moveFirst = (board)=>{
   }
 };
 
+export const moveLast = (board)=>{
+  let {gameboard, state, currentPlayer, game} = board;
+  let {moves, currentMove} = game;
+  if (currentMove < moves.length){
+    const lastMove = moves[moves.length - 1];
+    for (let i = currentMove; i < moves.length; i++){
+      const move = moves[i];
+      gameboard[move.row][move.col] = move.player;
+    }
+    if (lastMove.state === states.progress){
+      currentPlayer = lastMove.player === players.X ? players.O : players.X;
+    }
+    state = lastMove.state;
+    currentMove = moves.length;
+  }
+  return {
+    ...board,
+    gameboard: gameboard,
+    state: state,
+    currentPlayer: currentPlayer,
+    game: {moves:moves, currentMove:currentMove}
+  }
+};
