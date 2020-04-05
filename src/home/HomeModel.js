@@ -185,5 +185,27 @@ export const moveNext = (board)=>{
     currentPlayer: currentPlayer,
     game: {moves:moves, currentMove:currentMove}
   }
-
 };
+
+export const moveFirst = (board)=>{
+  let {gameboard, state, currentPlayer, game} = board;
+  let {moves, currentMove} = game;
+  if (currentMove > 0){
+    currentMove = 0;
+    currentPlayer = players.X;
+    state = states.progress;
+    for (let i = 0; i < 3; i++){
+      for (let j = 0; j < 3; j++){
+        gameboard[i][j] = "";
+      }
+    }
+  }
+  return {
+    ...board,
+    gameboard: gameboard,
+    state: state,
+    currentPlayer: currentPlayer,
+    game: {moves:moves, currentMove:currentMove}
+  }
+};
+

@@ -94,7 +94,7 @@ function HomeView(props) {
       <div className="container col-11 col-sm-11 col-md-9 col-lg-7 col-xl-6 mx-auto mt-5
                       d-flex flex-row justify-content-around">
 
-        <img className="first-image btn btn-outline-success "
+        <img className="first-image btn btn-outline-success" onClick={onMove} id="move-first"
              src="/images/first.svg" alt="first"/>
 
         <img className="first-image btn btn-outline-success" onClick={onMove} id="move-back"
