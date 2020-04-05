@@ -94,25 +94,34 @@ const isBoardFull = (board)=>{
   return true;
 };
 
+const deleteMovesAfterCurrentMove = (game)=>{
+  let {moves, currentMove} = game;
+  if (currentMove < moves.length){
+    moves = moves.slice(0, currentMove);
+  }
+  return {...game, moves:moves};
+};
+
+
 export const makeMove = (board, row, col)=>{
   let {gameboard, state, winner, currentPlayer, game} = board;
   let {moves, currentMove} = game;
 
   if (isCellValid(board, row, col)){
+    moves = deleteMovesAfterCurrentMove(game).moves;
     gameboard[row][col] = currentPlayer;
     let move = {player:currentPlayer, row:row, col:col, state:state};
 
     if (isWinningMove(board, row, col)){
       state = states.finish;
       winner = currentPlayer;
-      move = {...move, state: state};
     }else if (isBoardFull(board) && state === states.progress){
       state = states.draw;
-      move = {...move, state: state};
     }
-
-    moves.push(move);
     currentMove++;
+    move = {...move, state: state};
+    moves.push(move);
+
 
     if (state === states.progress){
       currentPlayer = currentPlayer === players.X ? players.O : players.X;
@@ -129,16 +138,24 @@ export const makeMove = (board, row, col)=>{
   };
 };
 
+
 export const moveBack = (board)=>{
   let {gameboard, state, currentPlayer, game} = board;
   let {moves, currentMove} = game;
   if (currentMove > 0){
     const moveCurrent = moves[currentMove - 1];
     gameboard[moveCurrent.row][moveCurrent.col] = "";
+    if (moveCurrent.state === states.progress){
+      currentPlayer = currentPlayer === players.X ? players.O : players.X;
+    }
     currentMove--;
-    const moveToMoveBack = moves[currentMove - 1];
-    state = moveToMoveBack.state;
-    currentPlayer = currentPlayer === players.X ? players.O : players.X;
+    if (currentMove > 0){
+      const moveToMoveBack = moves[currentMove - 1];
+      state = moveToMoveBack.state;
+    }else {
+      state = states.progress
+    }
+
   }
   return {
     ...board,
