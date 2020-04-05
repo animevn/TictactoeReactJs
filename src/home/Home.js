@@ -25,7 +25,7 @@ function Home() {
     setMyboard(old=>makeMove(old, row, col));
   }
 
-  function onMoveBack(event) {
+  function onMove(event) {
     const id = event.target.id;
     switch (id) {
       case "move-back":
@@ -47,7 +47,7 @@ function Home() {
   }
 
   return (
-    <HomeView reset={reset} onClick={onClick} onMoveBack={onMoveBack}/>
+    <HomeView reset={reset} onClick={onClick} onMove={onMove}/>
   )
 }
 

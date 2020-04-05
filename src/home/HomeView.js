@@ -17,7 +17,7 @@ function HomeView(props) {
 
   function onMove(event) {
     event.preventDefault();
-    props.onMoveBack(event);
+    props.onMove(event);
   }
 
   return (

@@ -220,6 +220,8 @@ export const moveLast = (board)=>{
     }
     if (lastMove.state === states.progress){
       currentPlayer = lastMove.player === players.X ? players.O : players.X;
+    }else {
+      currentPlayer = lastMove.player;
     }
     state = lastMove.state;
     currentMove = moves.length;
