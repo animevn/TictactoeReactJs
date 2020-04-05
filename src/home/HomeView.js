@@ -15,7 +15,7 @@ function HomeView(props) {
     props.onClick(event);
   }
 
-  function onMoveBack(event) {
+  function onMove(event) {
     event.preventDefault();
     props.onMoveBack(event);
   }
@@ -97,10 +97,10 @@ function HomeView(props) {
         <img className="first-image btn btn-outline-success "
              src="/images/first.svg" alt="first"/>
 
-        <img className="first-image btn btn-outline-success" onClick={onMoveBack}
+        <img className="first-image btn btn-outline-success" onClick={onMove} id="move-back"
              src="/images/back.svg" alt="back"/>
 
-        <img className="first-image btn btn-outline-success "
+        <img className="first-image btn btn-outline-success " onClick={onMove} id="move-next"
              src="/images/next.svg" alt="next"/>
 
         <img className="first-image btn btn-outline-success "

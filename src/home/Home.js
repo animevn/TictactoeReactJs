@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import "./Home.css";
-import {BoardContext, clearCells, makeMove, moveBack} from "./HomeModel";
+import {BoardContext, clearCells, makeMove, moveBack, moveNext} from "./HomeModel";
 import HomeView from "./HomeView";
 
 function Home() {
@@ -18,7 +18,19 @@ function Home() {
   }
 
   function onMoveBack(event) {
-    setMyboard(old=>moveBack(old));
+    const id = event.target.id;
+    switch (id) {
+      case "move-back":
+        setMyboard(old=>moveBack(old));
+        break;
+      case "move-next":
+        setMyboard(old=>moveNext(old));
+        break;
+
+      default:
+        break;
+    }
+
   }
 
   return (

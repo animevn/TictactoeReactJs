@@ -165,3 +165,25 @@ export const moveBack = (board)=>{
     game: {moves:moves, currentMove:currentMove}
   }
 };
+
+export const moveNext = (board)=>{
+  let {gameboard, state, currentPlayer, game} = board;
+  let {moves, currentMove} = game;
+  if (currentMove < moves.length){
+    const nextMove = moves[currentMove];
+    gameboard[nextMove.row][nextMove.col] = nextMove.player;
+    currentMove++;
+    state = nextMove.state;
+    if (nextMove.state === states.progress){
+      currentPlayer = currentPlayer === players.X ? players.O : players.X;
+    }
+  }
+  return {
+    ...board,
+    gameboard: gameboard,
+    state: state,
+    currentPlayer: currentPlayer,
+    game: {moves:moves, currentMove:currentMove}
+  }
+
+};
