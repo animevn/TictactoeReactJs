@@ -1,16 +1,10 @@
 import React, {useContext} from "react";
 import "./Home.css";
-import {
-  BoardContext,
-  inform,
-  moveBackEnable,
-  moveFirstEnable,
-  moveLastEnable,
-  moveNextEnable
-} from "./HomeModel";
+import {BoardContext} from "./HomeModel";
 
 function HomeView(props) {
-  const {myboard} = useContext(BoardContext);
+  const {myboard, inform, moveFirstEnable, moveBackEnable,
+    moveNextEnable, moveLastEnable} = useContext(BoardContext);
 
   function reset(event) {
     event.preventDefault();
@@ -101,22 +95,22 @@ function HomeView(props) {
       <div className="container col-11 col-sm-11 col-md-9 col-lg-7 col-xl-6 mx-auto mt-5
                       d-flex flex-row justify-content-around">
 
-        <img className={(moveFirstEnable(myboard) ? "image-disable " : "image-enable ")
+        <img className={(moveFirstEnable() ? "image-disable " : "image-enable ")
                         + "btn btn-outline-success"}
              onClick={onMove} id="move-first"
              src="/images/first.svg" alt="first"/>
 
-        <img className={(moveBackEnable(myboard) ? "image-enable " : "image-disable ")
+        <img className={(moveBackEnable() ? "image-enable " : "image-disable ")
                         + "btn btn-outline-success"}
              onClick={onMove} id="move-back"
              src="/images/back.svg" alt="back"/>
 
-        <img className={(moveNextEnable(myboard) ? "image-enable " : "image-disable ")
+        <img className={(moveNextEnable() ? "image-enable " : "image-disable ")
                         + "btn btn-outline-success"}
              onClick={onMove} id="move-next"
              src="/images/next.svg" alt="next"/>
 
-        <img className={(moveLastEnable(myboard) ? "image-disable " : "image-enable ")
+        <img className={(moveLastEnable() ? "image-disable " : "image-enable ")
                         + "btn btn-outline-success"}
              onClick={onMove} id="move-last"
              src="/images/last.svg" alt="last"/>
