@@ -6,18 +6,15 @@ function HomeView(props) {
   const {myboard, inform, moveFirstEnable, moveBackEnable,
     moveNextEnable, moveLastEnable} = useContext(BoardContext);
 
-  function reset(event) {
-    event.preventDefault();
+  function reset() {
     props.reset()
   }
 
   function onClick(event) {
-    event.preventDefault();
     props.onClick(event);
   }
 
   function onMove(event) {
-    event.preventDefault();
     props.onMove(event);
   }
 
@@ -92,26 +89,22 @@ function HomeView(props) {
 
       </div>
 
-      <div className="container col-11 col-sm-11 col-md-9 col-lg-7 col-xl-6 mx-auto mt-5
-                      d-flex flex-row justify-content-around">
+      <div className="container col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6 mx-auto mt-5
+                      d-flex flex-row justify-content-around p-0">
 
-        <img className={(moveFirstEnable() ? "image-disable " : "image-enable ")
-                        + "btn btn-outline-success"}
+        <img className={(moveFirstEnable() ? "image-disable " : "image-enable ") + "btn"}
              onClick={onMove} id="move-first"
              src="/images/first.svg" alt="first"/>
 
-        <img className={(moveBackEnable() ? "image-enable " : "image-disable ")
-                        + "btn btn-outline-success"}
+        <img className={"btn " + (moveBackEnable() ? "image-enable " : "image-disable ")}
              onClick={onMove} id="move-back"
              src="/images/back.svg" alt="back"/>
 
-        <img className={(moveNextEnable() ? "image-enable " : "image-disable ")
-                        + "btn btn-outline-success"}
+        <img className={"btn " + (moveNextEnable() ? "image-enable " : "image-disable ")}
              onClick={onMove} id="move-next"
              src="/images/next.svg" alt="next"/>
 
-        <img className={(moveLastEnable() ? "image-disable " : "image-enable ")
-                        + "btn btn-outline-success"}
+        <img className={"btn " + (moveLastEnable() ? "image-disable " : "image-enable ")}
              onClick={onMove} id="move-last"
              src="/images/last.svg" alt="last"/>
       </div>
