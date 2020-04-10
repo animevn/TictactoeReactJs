@@ -1,8 +1,23 @@
 import React, {useContext} from "react";
 import "./Home.css";
 import {BoardContext} from "./HomeModel";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import AddIcon from '@material-ui/icons/Add';
+import Fab from "@material-ui/core/Fab";
+import Button from "@material-ui/core/Button";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme)=>({
+  fab: {
+    position: 'absolute',
+    top: theme.spacing(9),
+    right: theme.spacing(2),
+  }
+}));
 
 function HomeView(props) {
+  const classes = useStyles();
   const {myboard, inform, moveFirstEnable, moveBackEnable,
     moveNextEnable, moveLastEnable} = useContext(BoardContext);
 
@@ -20,13 +35,11 @@ function HomeView(props) {
 
   return (
     <div className="container">
+      <Fab className={classes.fab} color="primary" aria-label="add" size="small" onClick={reset}>
+        <AddIcon />
+      </Fab>
 
-      <div className="container col-11 col-sm-11 col-md-9 col-lg-7 col-xl-6">
-        <button className="btn btn-lg btn-danger rounded-circle button-add shadow-lg"
-                onClick={reset}>
-          +
-        </button>
-      </div>
+      <Button variant="text" color="secondary">Hello</Button>
 
       <div className="container col-8 col-sm-8 col-md-6 col-lg-4 col-xl-4 mt-3">
         <h2 className="text-center text-success">{inform(myboard)}</h2>
