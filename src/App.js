@@ -2,26 +2,23 @@ import React from "react";
 import Header from "./Header"
 import Footer from "./Footer";
 import Home from "./home/Home";
-import "bootstrap/dist/css/bootstrap.min.css"
-import "./App.css"
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import {BoardContextProvider} from "./home/HomeModel";
 
 function App() {
   return (
-    <div className="main">
-      <div className="container-fluid px-0">
+    <Box display="flex" flexDirection="column" justifyContent="space-between" minHeight="100vh">
+      <Grid>
         <Header/>
-
-        {/*app goes in here*/}
-        <div className="container pt-2">
-          <BoardContextProvider>
-            <Home/>
-          </BoardContextProvider>
-        </div>
-
-      </div>
+        {/*app body goes down here*/}
+        <BoardContextProvider>
+          <Home/>
+        </BoardContextProvider>
+        {/*app body goes up here hahaha */}
+      </Grid>
       <Footer/>
-    </div>
+    </Box>
   );
 }
 
