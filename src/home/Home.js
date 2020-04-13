@@ -19,7 +19,7 @@ function Home() {
   }
 
   function onMove(event) {
-    const id = event.target.id;
+    const id = event.currentTarget.id;
     switch (id) {
       case "move-back":
         moveBack();
