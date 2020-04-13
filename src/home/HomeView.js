@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useRef, useState, useEffect} from "react";
 import "./Home.css";
 import {BoardContext} from "./HomeModel";
 import Grid from "@material-ui/core/Grid";
@@ -15,18 +15,15 @@ import Typography from "@material-ui/core/Typography";
 const width = {xs:"90%", sm:"550px", md:"550px", lg:"550px", xl:"550px"};
 const padTop = {xs:5, sm:5, md:8, lg:10, xl:11};
 
-// const useStyles = makeStyles((theme)=>({
-//   fab: {
-//     position: 'absolute',
-//     align: FormatAlignRight,
-//     right: theme.spacing(2),
-//   }
-// }));
-
 function HomeView(props) {
-  // const classes = useStyles();
   const {myboard, inform, moveFirstEnable, moveBackEnable,
     moveNextEnable, moveLastEnable} = useContext(BoardContext);
+  const ref = useRef(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    setHeight(ref.current.clientWidth);
+  }, []);
 
   function reset() {
     props.reset()
@@ -44,8 +41,7 @@ function HomeView(props) {
     <Grid container direction="row" justify="center" alignItems="center">
 
       <Box mt={padTop} borderRadius={5} boxShadow={3} bgcolor="white" mx={2} mb={10}
-           display="flex" flexDirection="column" alignContent="stretch" width={width}
-      >
+           display="flex" flexDirection="column" alignContent="stretch" width={width}>
 
         <Box display="flex" flexDirection="row" justifyContent="flex-end" mt={-2.5} pr={2}>
           <Fab color="primary" aria-label="add" onClick={reset}>
@@ -61,85 +57,108 @@ function HomeView(props) {
 
 
 
-        <div className="container mt-3">
-          <div className="row d-flex flex-row justify-content-center">
-            <button className="btn rounded-0 border-left border-top text-success"
-                    style={{"width":"5rem", "height":"5rem"}}
-                    id="00" onClick={onClick}>
-              {myboard.gameboard[0][0]}
-            </button>
-            <button className="btn rounded-0 border-left border-top text-success"
-                    style={{"width":"5rem", "height":"5rem"}}
-                    id="01" onClick={onClick}>
-              {myboard.gameboard[0][1]}
-            </button>
-            <button className="btn rounded-0 border-left border-top border-right text-success"
-                    style={{"width":"5rem", "height":"5rem"}}
-                    id="02" onClick={onClick}>
-              {myboard.gameboard[0][2]}
-            </button>
-          </div>
+        <Box ref={ref} mx="auto" my={2} >
 
-          <div className="row d-flex flex-row justify-content-center">
-            <button className="btn rounded-0 border-left border-top text-success"
-                    style={{"width":"5rem", "height":"5rem"}}
-                    id="10" onClick={onClick}>
-              {myboard.gameboard[1][0]}
-            </button>
-            <button className="btn rounded-0 border-left border-top text-success"
-                    style={{"width":"5rem", "height":"5rem"}}
-                    id="11" onClick={onClick}>
-              {myboard.gameboard[1][1]}
-            </button>
-            <button className="btn rounded-0 border-left border-top border-right text-success"
-                    style={{"width":"5rem", "height":"5rem"}}
-                    id="12" onClick={onClick}>
-              {myboard.gameboard[1][2]}
-            </button>
-          </div>
+          <Box display="flex" flexDirection="row" alignContent="space-evenly" height={height/3}>
 
-          <div className="row d-flex flex-row justify-content-center">
-            <button className="btn rounded-0 border-left border-top border-bottom text-success"
-                    style={{"width":"5rem", "height":"5rem"}}
-                    id="20" onClick={onClick}>
-              {myboard.gameboard[2][0]}
-            </button>
-            <button className="btn rounded-0 border-left border-top border-bottom text-success"
-                    style={{"width":"5rem", "height":"5rem"}}
-                    id="21" onClick={onClick}>
-              {myboard.gameboard[2][1]}
-            </button>
-            <button className="btn rounded-0 border-left border-top border-right border-bottom
-                  text-success" style={{"width":"5rem", "height":"5rem"}}
-                    id="22" onClick={onClick}>
-              {myboard.gameboard[2][2]}
-            </button>
-          </div>
+            <Box width={1/3} borderTop={1} borderLeft={1}
+                 display="flex" flexDirection="row" alignContent="stretch"
+                 >
+              <Button fullWidth id="00" onClick={onClick}>
+                {myboard.gameboard[0][0]}
+              </Button>
+            </Box>
 
-        </div>
+            <Box width={1/3} borderTop={1} borderLeft={1}
+                 display="flex" flexDirection="row" alignContent="stretch">
+              <Button fullWidth id="01" onClick={onClick}>
+                {myboard.gameboard[0][1]}
+              </Button>
+            </Box>
 
-        <Box display="flex" flexDirection="row" justifyContent="space-evenly">
+            <Box width={1/3} borderTop={1} borderLeft={1} borderRight={1}
+                 display="flex" flexDirection="row" alignContent="stretch">
+              <Button fullWidth id="02" onClick={onClick}>
+                {myboard.gameboard[0][2]}
+              </Button>
+            </Box>
 
-          <IconButton color="secondary" startIcon={<ArrowLeft/>}
+          </Box>
+
+          <Box display="flex" flexDirection="row" alignContent="space-evenly" height={height/3}>
+
+            <Box width={1/3} borderTop={1} borderLeft={1}
+                 display="flex" flexDirection="row" alignContent="stretch">
+              <Button fullWidth id="10" onClick={onClick}>
+                {myboard.gameboard[1][0]}
+              </Button>
+            </Box>
+
+            <Box width={1/3} borderTop={1} borderLeft={1}
+                 display="flex" flexDirection="row" alignContent="stretch">
+              <Button fullWidth id="11" onClick={onClick}>
+                {myboard.gameboard[1][1]}
+              </Button>
+            </Box>
+
+            <Box width={1/3} borderTop={1} borderLeft={1} borderRight={1}
+                 display="flex" flexDirection="row" alignContent="stretch">
+              <Button fullWidth id="12" onClick={onClick}>
+                {myboard.gameboard[1][2]}
+              </Button>
+            </Box>
+
+          </Box>
+
+          <Box display="flex" flexDirection="row" alignContent="space-evenly" height={height/3}>
+
+            <Box width={1/3} borderTop={1} borderLeft={1} borderBottom={1}
+                 display="flex" flexDirection="row" alignContent="stretch">
+              <Button fullWidth id="20" onClick={onClick}>
+                {myboard.gameboard[2][0]}
+              </Button>
+            </Box>
+
+            <Box width={1/3} borderTop={1} borderLeft={1} borderBottom={1}
+                 display="flex" flexDirection="row" alignContent="stretch">
+              <Button fullWidth id="21" onClick={onClick}>
+                {myboard.gameboard[2][1]}
+              </Button>
+            </Box>
+
+            <Box width={1/3} border={1}
+                 display="flex" flexDirection="row" alignContent="stretch">
+              <Button fullWidth id="22" onClick={onClick}>
+                {myboard.gameboard[2][2]}
+              </Button>
+            </Box>
+
+          </Box>
+
+        </Box>
+
+        <Box display="flex" flexDirection="row" justifyContent="space-evenly" my={1}>
+
+          <IconButton color="secondary"
                       disabled={!!moveFirstEnable()} onClick={onMove} id="move-first"
           >
             {<FastRewind fontSize="large"/>}
           </IconButton>
 
-          <IconButton color="secondary" startIcon={<ArrowLeft/>}
+          <IconButton color="secondary"
                       disabled={!moveBackEnable()} onClick={onMove} id="move-back"
                       >
             {<ArrowLeft fontSize="large"/>}
           </IconButton>
 
-          <IconButton color="secondary" startIcon={<ArrowLeft/>}
+          <IconButton color="secondary"
                       disabled={!moveNextEnable()} onClick={onMove} id="move-next"
           >
             {<ArrowRight fontSize="large"/>}
           </IconButton>
 
 
-          <IconButton color="secondary" startIcon={<ArrowLeft/>}
+          <IconButton color="secondary"
                       disabled={!!moveLastEnable()} onClick={onMove} id="move-last"
           >
             {<FastForward fontSize="large"/>}

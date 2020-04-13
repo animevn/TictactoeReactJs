@@ -12,7 +12,7 @@ function Home() {
   }
 
   function onClick(event) {
-    const id = event.target.id;
+    const id = event.currentTarget.id;
     const row = id.substring(0, 1);
     const col = id.substring(1, 2);
     makeMove(row, col);
